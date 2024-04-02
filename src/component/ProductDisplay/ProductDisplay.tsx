@@ -11,7 +11,7 @@ interface pro {
 
 const ProductDisplay = (props: pro) => {
   const { product } = props;
-  // console.log(product?.image, "image");
+
   const { addtoCart } = useContext(ShopContext);
   return (
     <>

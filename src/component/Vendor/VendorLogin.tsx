@@ -1,13 +1,14 @@
 import React, { ChangeEvent, useState } from "react";
-import "./CSS/LoginSignup.css";
+import "./VendorLogin.css";
 
 const LoginSignup: React.FC = () => {
-  const [state, setState] = useState("Login");
+  const [state, setState] = useState("Vendor Login");
   const [formData, setFormData] = useState({
     username: "",
     password: "",
     email: "",
   });
+
 
   const changeHandler = (e: ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -17,7 +18,7 @@ const LoginSignup: React.FC = () => {
     console.log("Login Function Executed", formData);
 
     try {
-      const response = await fetch("http://localhost:5000/login", {
+      const response = await fetch("http://localhost:5000/loginvendor", {
         method: "POST",
         headers: {
           Accept: "application/form-data",
@@ -27,13 +28,13 @@ const LoginSignup: React.FC = () => {
       });
 
       const responseData = await response.json();
-      console.log(responseData, "dataaaaaaaaaaaaaaaaaaaa");
+
       if (responseData.success) {
         localStorage.setItem("auth-token", responseData.token);
         localStorage.setItem("userName", responseData.userName);
 
         // setFormData({ ...formData, username: responseData.user.username });
-        window.location.replace("/");
+        window.location.replace("/Vendor");
       } else {
         console.log("Unsuccessful response:", responseData);
         alert(responseData.errors);
@@ -47,7 +48,7 @@ const LoginSignup: React.FC = () => {
     console.log("Signup Function Executed", formData);
 
     try {
-      const response = await fetch("http://localhost:5000/signup", {
+      const response = await fetch("http://localhost:5000/signupvendor", {
         method: "POST",
         headers: {
           Accept: "application/form-data",
@@ -61,7 +62,7 @@ const LoginSignup: React.FC = () => {
       if (responseData.success) {
         localStorage.setItem("auth-token", responseData.token);
 
-        window.location.replace("/");
+        window.location.replace("/VendorLogin");
       } else {
         console.log("Unsuccessful response:", responseData);
         alert(responseData.errors);
@@ -78,7 +79,7 @@ const LoginSignup: React.FC = () => {
           <h1>{state}</h1>
           <form>
             <div className="loginsignup-fields">
-              {state === "Sign Up" ? (
+              {state === "Vendor Sign Up" ? (
                 <input
                   name="username"
                   value={formData.username}
@@ -105,7 +106,9 @@ const LoginSignup: React.FC = () => {
               />
             </div>
           </form>
-          <button onClick={() => (state === "Login" ? login() : signup())}>
+          <button
+            onClick={() => (state === "Vendor Login" ? login() : signup())}
+          >
             Continue
           </button>
 
@@ -114,7 +117,7 @@ const LoginSignup: React.FC = () => {
               Already have an account?{" "}
               <span
                 onClick={() => {
-                  setState("Login");
+                  setState("Vendor Login");
                 }}
                 style={{
                   cursor: "pointer",
@@ -130,7 +133,7 @@ const LoginSignup: React.FC = () => {
               Create an account?{" "}
               <span
                 onClick={() => {
-                  setState("Sign Up");
+                  setState("Vendor Sign Up");
                 }}
                 style={{
                   cursor: "pointer",
