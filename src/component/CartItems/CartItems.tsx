@@ -1,17 +1,18 @@
 import React, { useContext } from "react";
 import "./CartItem.css";
 import { ShopContext } from "../../Context/ShopContext";
-
+// import { appProduct } from "../Assests/all_products";
 // import remove_icon from '../Assests/cart_cross_icon.png'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
+
 interface Product {
   id: string;
   name: string;
   image: string;
   new_price: number;
-  // Add any other properties if needed
 }
+
 const CartItems = () => {
   const {
     getTotalCartAmount,
@@ -19,6 +20,7 @@ const CartItems = () => {
     cartItems,
     removeFromCart,
   } = useContext(ShopContext);
+
 
   return (
     <div className="cartitems">
@@ -31,7 +33,7 @@ const CartItems = () => {
       </div>
       <hr />
       {all_product.map((e: Product) => {
-        if (cartItems[e.id] > 0) {
+        if (cartItems[e.id] && cartItems[e.id] > 0) {
           return (
             <div key={e.id}>
               <div className="cartitems-format cartitems-format-main ">

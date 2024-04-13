@@ -7,7 +7,9 @@ import React, {
 // import all_product from "../component/Assests/all_products";
 import { appProduct } from "../component/Assests/all_products";
 
-export const ShopContext = createContext<any | null>(null);
+// export const ShopContext = createContext<any | null>(null);
+export const ShopContext = createContext<any>({});
+
 
 const getDefaultCart = (): { [key: number]: number } => {
   let cart: { [key: number]: number } = {};
@@ -113,6 +115,7 @@ const ShopContextProvider: React.FC<PropsWithChildren<{}>> = (props) => {
 
   const getTotalCartItems = () => {
     let totalItem = 0;
+    if (cartItems == null) return totalItem;
     for (const item in cartItems) {
       if (cartItems[item] > 0) {
         totalItem += cartItems[item];

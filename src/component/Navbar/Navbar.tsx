@@ -40,7 +40,13 @@ const Navbar: React.FC = () => {
   };
 
   const [menu, setMenu] = useState("Shop");
+  // const { getTotalCartItems } = useContext(ShopContext);
+  // const { getTotalCartItems } = useContext(ShopContext || null);
   const { getTotalCartItems } = useContext(ShopContext);
+
+  // Check if getTotalCartItems is null, and provide a default value if it is
+  const totalCartItems = getTotalCartItems ? getTotalCartItems() : 0;
+
   // const menuRef = useRef();
   const menuRef = useRef<HTMLUListElement | null>(null);
 
@@ -138,7 +144,7 @@ const Navbar: React.FC = () => {
           <Link to="cart">
             <img src={cart} alt="" />
           </Link>
-          <div className="nav-cart-count">{getTotalCartItems()}</div>
+          <div className="nav-cart-count">{totalCartItems}</div>
         </div>
       </ul>
     </div>

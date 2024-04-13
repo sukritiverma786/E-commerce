@@ -9,7 +9,6 @@ const LoginSignup: React.FC = () => {
     email: "",
   });
 
-
   const changeHandler = (e: ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
