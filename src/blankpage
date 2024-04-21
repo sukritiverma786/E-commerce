@@ -1,0 +1,78 @@
+// import express from "express";
+// import mongoose from "mongoose";
+// import { Request, Response } from "express";
+// const app = express();
+// import * as jwt from "jsonwebtoken";
+// import multer from "multer";
+// import path from "path";
+// import cors from "cors";
+// import { Product } from "./Model/Product";
+// import ProductRouter from "./router/Product";
+
+// const port = 5000;
+
+// app.use(express.json());
+// app.use(express.urlencoded({ extended: true }));
+
+// const connectdb = async () => {
+//   try {
+//     const newProduct = {
+//       id: 1,
+//       name: "Example Product",
+//       image: "example.jpg",
+//       category: "Example Category",
+//       old_price: 10.99,
+//       new_price: 8.99,
+//       available: true,
+//       stockQuantity: 5,
+//       date: new Date("2015-02-22"),
+//     };
+//     mongoose.connect("mongodb://127.0.0.1:27017/ECommerce");
+//     const savedProduct = await Product.build(newProduct).save();
+//     console.log("New product saved:", savedProduct);
+//   } catch (error) {
+//     console.error("Error connecting to MongoDB:", error);
+//   }
+// };
+
+// connectdb();
+// app.use(ProductRouter);
+
+// app.use(express.json());
+// // app.use(cors());
+// app.use(
+//   cors({
+//     origin: "http://127.0.0.1:5173", // Replace with your frontend domain
+//   })
+// );
+
+// app.get("/", (req, res) => {
+//   res.send("Hello, TypeScript with Express!");
+// });
+
+// // Image storage Engine
+// const storage = multer.diskStorage({
+//   destination: "./upload/Images",
+//   filename: (req, file, cb) => {
+//     return cb(
+//       null,
+//       `${file.fieldname}_${Date.now()}${path.extname(file.originalname)}`
+//     );
+//   },
+// });
+// const upload = multer({ storage: storage });
+
+// app.use("/images", express.static("upload/images"));
+
+// app.post("/upload", upload.single("product"), (req: Request, res: Response) => {
+//   console.log("it is working or not");
+//   const uploadedFile = req.file;
+//   res.json({
+//     success: 1,
+//     image_url: `http://localhost:${port}/images/${req.file?.filename}`,
+//   });
+// });
+
+// app.listen(port, () => {
+//   console.log(`Server is running on http://localhost:${port}`);
+// });
